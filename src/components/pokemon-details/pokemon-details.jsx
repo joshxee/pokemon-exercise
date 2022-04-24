@@ -4,6 +4,9 @@ import {
   Button,
   Card,
   Content,
+  Media,
+  Image,
+  Box,
 } from "react-bulma-components";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -21,6 +24,7 @@ export function PokemonDetails() {
       (result) => {
         setIsLoaded(true);
         setPokemon(result);
+        console.log(pokemon);
       },
       (error) => {
         setIsLoaded(true);
@@ -30,27 +34,57 @@ export function PokemonDetails() {
   }, [params.pokemonName]);
 
   if (error) {
-    return <Heading size={3} textColor="Danger">Error: {error.message}</Heading>;
+    return (
+      <Heading size={3} textColor="Danger">
+        Error: {error.message}
+      </Heading>
+    );
   } else if (!isLoaded) {
-    return <Heading size={3} textColor="light">Loading...</Heading>;
+    return (
+      <Heading size={3} textColor="light">
+        Loading...
+      </Heading>
+    );
   } else {
     return (
-      <Container p={2} textAlign="center">
-        <Card style={{ width: "500px", margin: "auto" }} p={2}>
-          <Card.Image src={`https://projectpokemon.org/images/normal-sprite/${params.pokemonName}.gif`} size="16" fullwidth="false" />
-          <Heading textTransform="capitalized" textColor="dark" size={4}>
-            {params.pokemonName}
-          </Heading>
-          <Content>
-            Types:
-            {pokemon?.types?.reduce((typesList, type, index) => {
-              if (index === 0) return ` ${type.type.name}`;
-              return typesList.concat(`, ${type.type.name}`);
-            }, "")}
-          </Content>
+      <Container textAlign="center">
+        <Card style={{ width: "400px", margin: "auto" }}>
+          <Card.Image
+            src={pokemon?.sprites?.other["official-artwork"].front_default}
+            fallback={pokemon?.sprites?.front_default}
+            rounded="true"
+          />
+          <Card.Content backgroundColor="white-ter">
+            <Media>
+              <Media.Item renderAs="figure" align="left">
+                <Image
+                  size={64}
+                  alt="64x64"
+                  src={`https://projectpokemon.org/images/normal-sprite/${params.pokemonName.replace(
+                    /-/g,
+                    "_"
+                  )}.gif`}
+                />
+              </Media.Item>
+              <Media.Item>
+                <Heading textTransform="capitalized" textColor="dark" size={3}>
+                  {params.pokemonName}
+                </Heading>
+              </Media.Item>
+            </Media>
+            <Content>
+              Types:
+              {pokemon?.types?.reduce((typesList, type, index) => {
+                if (index === 0) return ` ${type.type.name}`;
+                return typesList.concat(`, ${type.type.name}`);
+              }, "")}
+            </Content>
+          </Card.Content>
         </Card>
         <Link to={`/`}>
-          <Button m={2}>Home</Button>
+          <Button color="text" renderAs="span" w="400px" m={2}>
+            Home
+          </Button>
         </Link>
       </Container>
     );
