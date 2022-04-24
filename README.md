@@ -5,7 +5,14 @@ Done by Josh Cleland
 
  - Styling with [Bulma](bulma.io)
  - Routing with [React Router](reactrouter.com/docs/en/v6)
- - deployed with [Vercel](vercel.io)
+ - sentry tracing, sentry
+ - API mocking with msw
+ - API client with Axios
+
+## Technologies Used
+ - Sentry for Error tracking and monitoring
+ - Vercel for ci/cd and hosting
+ - Create-react-app for app scaffolding
 
 ## How to run
  - Install Dependencies: `yarn`
