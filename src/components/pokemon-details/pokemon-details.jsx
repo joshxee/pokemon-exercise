@@ -69,7 +69,7 @@ export function PokemonDetails() {
                   {params.pokemonName}
                 </Heading>
                 <Content>
-                  Types:
+                  Type{pokemon?.types.length > 1 && "s"}:
                   {pokemon?.types?.reduce((typesList, type, index) => {
                     if (index === 0) return ` ${type.type.name}`;
                     return typesList.concat(`, ${type.type.name}`);
