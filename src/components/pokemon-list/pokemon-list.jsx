@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Heading } from "react-bulma-components";
 import { getList } from "../../api/pokeapi";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 
 export function PokemonList() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -39,9 +39,7 @@ export function PokemonList() {
         <Button.Group align="center">
           {pokemonList.map((pokemon) => (
             <Link to={`/${pokemon.name}`} key={pokemon.name}>
-              <Button textTransform="capitalized">
-                {pokemon.name}
-              </Button>
+              <Button textTransform="capitalized">{pokemon.name}</Button>
             </Link>
           ))}
         </Button.Group>
