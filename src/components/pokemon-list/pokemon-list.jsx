@@ -22,19 +22,29 @@ export function PokemonList() {
   }, []);
 
   if (error) {
-    return <Heading size={3} textColor="light">Error: {error.message}</Heading>;
+    return (
+      <Heading size={3} textColor="light">
+        Error: {error.message}
+      </Heading>
+    );
   } else if (!isLoaded) {
-    return <Heading size={3} textColor="light">Loading...</Heading>;
+    return (
+      <Heading size={3} textColor="light">
+        Loading...
+      </Heading>
+    );
   } else {
     return (
       <Container alignContent="space-evenly">
-        {pokemonList.map((pokemon) => (
-          <Link to={`/${pokemon.name}`} key={pokemon.name}>
-            <Button textTransform="capitalized" p={1} m={1}>
-              {pokemon.name}
-            </Button>
-          </Link>
-        ))}
+        <Button.Group align="center">
+          {pokemonList.map((pokemon) => (
+            <Link to={`/${pokemon.name}`} key={pokemon.name}>
+              <Button textTransform="capitalized">
+                {pokemon.name}
+              </Button>
+            </Link>
+          ))}
+        </Button.Group>
       </Container>
     );
   }
