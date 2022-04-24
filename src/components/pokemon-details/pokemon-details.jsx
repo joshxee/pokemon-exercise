@@ -6,7 +6,6 @@ import {
   Content,
   Media,
   Image,
-  Box,
 } from "react-bulma-components";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -24,7 +23,6 @@ export function PokemonDetails() {
       (result) => {
         setIsLoaded(true);
         setPokemon(result);
-        console.log(pokemon);
       },
       (error) => {
         setIsLoaded(true);
@@ -70,15 +68,15 @@ export function PokemonDetails() {
                 <Heading textTransform="capitalized" textColor="dark" size={3}>
                   {params.pokemonName}
                 </Heading>
+                <Content>
+                  Types:
+                  {pokemon?.types?.reduce((typesList, type, index) => {
+                    if (index === 0) return ` ${type.type.name}`;
+                    return typesList.concat(`, ${type.type.name}`);
+                  }, "")}
+                </Content>
               </Media.Item>
             </Media>
-            <Content>
-              Types:
-              {pokemon?.types?.reduce((typesList, type, index) => {
-                if (index === 0) return ` ${type.type.name}`;
-                return typesList.concat(`, ${type.type.name}`);
-              }, "")}
-            </Content>
           </Card.Content>
         </Card>
         <Link to={`/`}>
