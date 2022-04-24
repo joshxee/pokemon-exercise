@@ -6,6 +6,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Heading } from "react-bulma-components";
 import { PokemonDetails } from "./components/pokemon-details/pokemon-details";
 import { PokemonList } from "./components/pokemon-list/pokemon-list";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_PUBLIC_KEY,
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <React.StrictMode>
