@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <Section backgroundColor="dark" style={{ "minHeight": "100vh" }}>
+    <Section backgroundColor="dark" style={{ minHeight: "100vh" }}>
       <Container>
         <Heading textAlign={"center"} textColor="light" size={1}>
           My Pokédex

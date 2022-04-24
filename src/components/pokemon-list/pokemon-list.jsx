@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Heading } from "react-bulma-components";
 import { getList } from "../../api/pokeapi";
-import { Link, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { sortByPokedexId } from "./pokemon-list.helpers";
 
 export function PokemonList() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -12,7 +13,8 @@ export function PokemonList() {
     getList().then(
       (result) => {
         setIsLoaded(true);
-        setPokemonList(result.pokemon_species);
+        const sortedPokemon = result.pokemon_species.sort(sortByPokedexId)
+        setPokemonList(sortedPokemon);
       },
       (error) => {
         setIsLoaded(true);
@@ -35,7 +37,7 @@ export function PokemonList() {
     );
   } else {
     return (
-      <Container alignContent="space-evenly">
+      <Container>
         <Button.Group align="center">
           {pokemonList.map((pokemon) => (
             <Link to={`/${pokemon.name}`} key={pokemon.name}>

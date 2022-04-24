@@ -68,6 +68,9 @@ export function PokemonDetails() {
                 <Heading textTransform="capitalized" textColor="dark" size={3}>
                   {params.pokemonName}
                 </Heading>
+                <Heading subtitle size={6}>
+                  #{String(pokemon?.id).padStart(3, '0')}
+                </Heading>
                 <Content>
                   Type{pokemon?.types.length > 1 && "s"}:
                   {pokemon?.types?.reduce((typesList, type, index) => {
